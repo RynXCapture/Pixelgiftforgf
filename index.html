@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Date 💗</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
+
+<style>
+html, body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    font-family: 'Patrick Hand', cursive;
+}
+
+#scene {
+    width: 100%;
+    height: 100%;
+    background: url("background1.png") center/cover no-repeat;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Texte principal */
+.text {
+    position: absolute;
+    top: 5%;
+    width: 100%;
+    text-align: center;
+    font-size: clamp(22px, 4vw, 32px);
+    color: white;
+    text-shadow: 0 0 12px black;
+    white-space: pre-line;
+    padding: 0 10px;
+}
+
+/* Outfit selector */
+#outfit-box {
+    position: absolute;
+    top: 22%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+#outfit {
+    width: min(240px, 45vw);
+}
+
+.arrow {
+    font-size: 40px;
+    color: white;
+    cursor: pointer;
+    user-select: none;
+}
+
+/* Boutons */
+button {
+    padding: 12px 26px;
+    font-size: clamp(18px, 3vw, 24px);
+    background: pink;
+    border: none;
+    border-radius: 14px;
+    cursor: pointer;
+    font-family: 'Patrick Hand', cursive;
+}
+
+/* GO */
+#go-btn {
+    position: absolute;
+    bottom: 12%;
+    width: 100%;
+    text-align: center;
+}
+
+/* Fauteuil */
+#fauteuil {
+    position: absolute;
+    bottom: 5%;
+    left: -400px;
+    width: min(320px, 60vw);
+    transition: left 2s ease;
+}
+
+/* Parchemin */
+#parchemin {
+    position: absolute;
+    inset: 5%;
+    background: linear-gradient(#f9e9c7, #efd6a3);
+    border-radius: 25px;
+    box-shadow:
+        inset 0 0 40px rgba(0,0,0,0.2),
+        0 25px 50px rgba(0,0,0,0.6);
+    padding: 30px;
+    display: none;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+#parchemin-text {
+    font-size: clamp(16px, 2.8vw, 20px);
+    color: #3b2a1a;
+    white-space: pre-wrap;
+    line-height: 1.6;
+}
+
+/* Lire bouton */
+#lire-btn {
+    position: absolute;
+    bottom: 6%;
+    width: 100%;
+    text-align: center;
+    display: none;
+}
+</style>
+</head>
+
+<body>
+<div id="scene">
+
+<div id="text" class="text">
+choose ur outfit for the date !!! FAST !
+</div>
+
+<div id="outfit-box">
+    <div class="arrow" onclick="prevOutfit()">⬅</div>
+    <img id="outfit" src="outfit1.png">
+    <div class="arrow" onclick="nextOutfit()">➡</div>
+</div>
+
+<div id="go-btn">
+    <button onclick="startDate()">GO !!!</button>
+</div>
+
+<img id="fauteuil" src="fauteuil.png">
+
+<div id="lire-btn">
+    <button onclick="showText()">Lire le texte 💌</button>
+</div>
+
+<div id="parchemin">
+    <div id="parchemin-text"></div>
+</div>
+
+</div>
+
+<script>
+let outfitIndex = 1;
+const maxOutfits = 5;
+
+function nextOutfit() {
+    outfitIndex = outfitIndex < maxOutfits ? outfitIndex + 1 : 1;
+    document.getElementById("outfit").src = "outfit" + outfitIndex + ".png";
+}
+
+function prevOutfit() {
+    outfitIndex = outfitIndex > 1 ? outfitIndex - 1 : maxOutfits;
+    document.getElementById("outfit").src = "outfit" + outfitIndex + ".png";
+}
+
+function startDate() {
+    const scene = document.getElementById("scene");
+    const fauteuil = document.getElementById("fauteuil");
+    const text = document.getElementById("text");
+
+    scene.style.background = 'url("background2.png") center/cover no-repeat';
+    document.getElementById("outfit-box").style.display = "none";
+    document.getElementById("go-btn").style.display = "none";
+
+    text.innerText = "AH IL EST DÉJÀ LÀ";
+
+    setTimeout(() => {
+        fauteuil.style.left = "50%";
+        fauteuil.style.transform = "translateX(-50%)";
+    }, 500);
+
+    setTimeout(() => {
+        fauteuil.remove();
+        scene.style.background = 'url("diner.png") center/cover no-repeat';
+        text.innerText =
+            "COUCOUUU MON AMOUUUUUR !!!!\n" +
+            "Tien des fleuuuuurs !!!!\n" +
+            "Et… et et un petit texte pour toiiiii !!!!";
+        document.getElementById("lire-btn").style.display = "block";
+    }, 2500);
+}
+
+function showText() {
+    document.getElementById("parchemin").style.display = "block";
+    const container = document.getElementById("parchemin-text");
+    container.innerText = "";
+
+    const fullText = `Bonjour mon Ange, tadaaa petit remake du 2G pour nos 9 mois ehehheeh…..
+
+Mon Soleil, je te souhaite un joyeux neuvième mois et une joyeuse vie en ma compagnie ehehhehe.
+Je ne te quitterai jaaaaaaamaiiiis. Et toi aussi hein ? ☹️😠.
+
+Sa me manque de pouvoir te prendre dans mes bras, de pouvoir manger avec toi
+(et taper deux trois crocs dans ton bras aussi mais chut…)
+de pouvoir me rouler sous la couette et arriver à hauteur de ta tête,
+comme un petit bébé (googoo gaga 👽).
+
+Mon Ange, Je t’aime infiniment profondément,
+je t’aime all the way back to the end of the galaxy.
+Je t’aime all the way back to Sospel,
+et je t’aime all the way back dans ton cœur
+(JE VIS DEDANS AAAA !!!!).
+
+Promet que bientôt on part vivre tout les deux ?
+Et que ces 9 mois se transformeront en 9 ans ?
+
+Je t’aime tellement mon Ange.
+Joyeux neuf mois.
+
+Ton amoureux,
+Aaron 💗💗💗💗💗💗💗💗💗`;
+
+    let i = 0;
+    const speed = 22;
+
+    function typeWriter() {
+        if (i < fullText.length) {
+            container.innerText += fullText.charAt(i);
+            i++;
+            setTimeout(typeWriter, speed);
+        }
+    }
+    typeWriter();
+}
+</script>
+</body>
+</html>
